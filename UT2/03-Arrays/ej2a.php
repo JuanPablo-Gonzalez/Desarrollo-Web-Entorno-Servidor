@@ -3,42 +3,51 @@ $arrImpares= array();
 $impares= 1;
 $arrPosicionImpares= array();
 $arrPosicionPares= array();
-$sumaPosicionesPares= 0;
-$sumaPosicionesImpares= 0;
+$sumaPosicionesPares;
+$sumaPosicionesImpares;
 
-//metemos los números impares en un array.
-for($i=0;$i<20;$i++) { //de 0 a 19 hay 20 impareses.
+echo "<table border='1'>";
+echo "<tr>";
+echo "<th>"."índice"."</th>";
+echo "<th>"."valor"."</th>";
+echo "<th>"."suma"."</th>";
+echo "</tr>";
+
+for($i=0;$i<20;$i++) { //de 0 a 19 hay 20 impares.
     $arrImpares[$i]= $impares;
     $suma= $i+$arrImpares[$i];
 
-    /*
-    echo "<table border='1'>";
     echo "<tr>";
-    echo "<th>"."índice"."</th>";
-    echo "<th>"."valor"."</th>";
-    echo "<th>"."media"."</th>";
-    echo "</tr>";
-	echo "<tr>";
 	echo "<td>". $i ."</td>";
-    echo "<td>". $arrImpares[$i] ."</td>";
-    echo "<td>". $suma."</td>";
+	echo "<td>". $arrImpares[$i] ."</td>";
+	echo "<td>". $suma."</td>";
 	echo "</tr>";
-	echo "</table>";
-    */
 
     $impares+=2;
 }
 
-//ahora recogeremos los valores de las posiciones pares en un array,
-//y los de las impares en otra.
+echo "</table>";
+
+/* Si la posición es par, el valor de esa posición se guardará en el array de posiciones pares,
+si no es par en la de impares. Hice que se rellenasen con 0 para que todas las posiciones
+estuviesen llenas y me funcionase la suma como la había hecho primeramente. Pero luego
+usando la función array_sum() la suma se hacía bien aunque no todas las posiciones estuviesen llenas.*/
 for($i=0;$i<count($arrImpares);$i++) {
-    if($i%2==0||$i==0) {
+    if($i%2==0) {
         $arrPosicionPares[$i]= $arrImpares[$i];
+		$arrPosicionImpares[$i]= 0;
     } else {
-        $arrPosicionPares[$i]= 0; //metemos un cero para rellenar. no influirá en la media.
+        $arrPosicionPares[$i]= 0;
+		$arrPosicionImpares[$i]= $arrImpares[$i];
     }
-    $sumaPosicionesPares= $sumaPosicionesPares+$arrPosicionPares[$i];
+	//AL PRINCIPIO HICE LA SUMA ASÍ, PERO LUEGO LO HICE CON LA FUNCIÓN ARRAY_SUM().
+    //$sumaPosicionesPares= $sumaPosicionesPares+$arrPosicionPares[$i];
+	//$sumaPosicionesImpares= $sumaPosicionesImpares+$arrPosicionImpares[$i];
 }
+
+/* 
+AL PRINCPIO HICE DOS FOR, UNO PARA CREAR EL ARRAY DE PARES Y OTRO CON EL DE IMPARES,
+PERO CON UN SOLO FOR SE PODÍAN HACER LOS DOS ARRAY A LA VEZ.
 
 for($i=0;$i<count($arrImpares);$i++) {
     if($i%2!=0) {
@@ -47,24 +56,13 @@ for($i=0;$i<count($arrImpares);$i++) {
         $arrPosicionImpares[$i]= 0;
     }
     $sumaPosicionesImpares= $sumaPosicionesImpares+$arrPosicionImpares[$i];
-}
+} 
+*/
+
+$sumaPosicionesPares= array_sum($arrPosicionPares);
+$sumaPosicionesImpares= array_sum($arrPosicionImpares);
 
 echo "Media de las posiciones pares: $sumaPosicionesPares/2= ".$sumaPosicionesPares/2;
 echo "<br>";
-echo "Media de las posiciones impares: . $sumaPosicionesImpares/2= ".$sumaPosicionesImpares/2 ;
-
-/*
-//muestra el array de las posiciones pares.
-for($i=0;$i<count($arrPosicionPares);$i++) {
-    echo $arrPosicionPares[$i]." - ";
-
-}
-
-echo "<br>";
-
-//muestra el array de las posiciones pares.
-for($i=0;$i<count($arrPosicionImpares);$i++) {
-    echo $arrPosicionImpares[$i]." - ";
-}
-*/ 
+echo "Media de las posiciones impares: $sumaPosicionesImpares/2= ".$sumaPosicionesImpares/2; 
 ?>
