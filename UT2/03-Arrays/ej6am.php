@@ -4,7 +4,6 @@ $matriz= array();
 $maximosFilas= array();
 $promediosFilas= array();
 $max= 0;
-$min= 0;
 $suma= 0;
 
 //RELLENAMOS LA MATRIZ CON LOS MÚLTIPLOS DE 2.
