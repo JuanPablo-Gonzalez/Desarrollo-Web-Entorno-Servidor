@@ -1,77 +1,41 @@
 <?php
-	$arr= array();
+
+/*Juan Pablo González*/
+
+$arr= array();
+$contNumeros=0;
+
+while($contNumeros<15) {
+	$numAleatorio= random_int(1,60);
+	if(!(in_array($numAleatorio,$arr))) {
+		$arr[$contNumeros]= $numAleatorio;
+		$contNumeros++;
+	}
+}
     
-	$contNumeros=0;
-    while($contNumeros<15) {
-		$numAleatorio= random_int(1,60);
-		if(!(in_array($numAleatorio,$arr))) {
-			$arr[$contNumeros]= $numAleatorio;
-			$contNumeros++;
-		}
-    }
+var_dump($arr);
     
-    var_dump($arr);
-    
-    $contApariciones= 0;
-	$numerosSacados= array();
-	$ganador= false;
+$contApariciones= 0;
+$numerosSacados= array();
+$ganador= false;
 	
-    while(!$ganador) {
-      $numAleatorio= random_int(1,60);
-	  if(!(in_array($numAleatorio,$numerosSacados))) {
+while(!$ganador) {
+    $numAleatorio= random_int(1,60);
+	if(!(in_array($numAleatorio,$numerosSacados))) {
 		for($i=0;$i<count($arr);$i++) {
 			if($arr[$i]==$numAleatorio) 
 				$contApariciones++;
 		}
-		if($contApariciones==15) {
+		if($contApariciones==15) 
 			$ganador= true;
-    }
-	  }
-	  array_push($numerosSacados,$numAleatorio);
-    }
+
+		array_push($numerosSacados,$numAleatorio);
+	}
+}
 	
-    if($ganador) {
-        echo "ganador";
-    }
+if($ganador) {
+    echo "Has ganado";
+}
 	
-	var_dump($numerosSacados);
-	
-	/*
-	$arr= array();
-    
-	$contNumeros=0;
-    while($contNumeros<5) {
-		$numAleatorio= random_int(1,10);
-		if(!(in_array($numAleatorio,$arr))) {
-			$arr[$contNumeros]= $numAleatorio;
-			$contNumeros++;
-		}
-    }
-    
-    var_dump($arr);
-    
-    $contApariciones= 0;
-	$numerosSacados= array();
-	$ganador= false;
-	
-    while(!$ganador) {
-      $numAleatorio= random_int(1,10);
-	  if(!(in_array($numAleatorio,$numerosSacados))) {
-		for($i=0;$i<count($arr);$i++) {
-			if($arr[$i]==$numAleatorio) 
-				$contApariciones++;
-		}
-		if($contApariciones==5) {
-			$ganador= true;
-    }
-	  }
-	  array_push($numerosSacados,$numAleatorio);
-    }
-	
-    if($ganador) {
-        echo "ganador";
-    }
-	
-	var_dump($numerosSacados);
-	*/
+var_dump($numerosSacados);
 ?>
