@@ -23,11 +23,11 @@ $numerosSacados= array();
 while($contApariciones<15) {
     $numAleatorio= random_int(1,60);
 	if(!(in_array($numAleatorio,$numerosSacados))) {
-	for($i=0;$i<count($arr);$i++) {
-		if($arr[$i]==$numAleatorio) 
-			$contApariciones++;
-	}
-	array_push($numerosSacados,$numAleatorio);
+		for($i=0;$i<count($arr);$i++) {
+			if($arr[$i]==$numAleatorio) 
+				$contApariciones++;
+		}
+		array_push($numerosSacados,$numAleatorio);
 	}
 }
 	
