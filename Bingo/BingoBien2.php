@@ -1,7 +1,8 @@
 <?php
 
 /*Juan Pablo González*/
-/*El que estoy haciendo en casa bien, iremos modificando sobre este.*/
+/*Este funciona bien, y tiene lo de rellenar los cartonesy mostrarlos bien hecho.
+También falta lo de varios ganadores y lo de que saque el cartón ganador.*/
 
 //LO HE PENSADO COMO SI CADA JUGADOR TUVIESE 3 ARRAYS, QUE SERÁN SUS CARTONES. 
 $jugador1= array(
