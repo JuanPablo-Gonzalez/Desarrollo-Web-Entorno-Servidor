@@ -1,7 +1,7 @@
 <?php
 
 /*Juan Pablo González*/
-/*El que estoy haciendo en casa bien*/
+/*Funciona, pero hice de otra forma las funciones de rellenar y mostrar en bien2*/
 
 //LO HE PENSADO COMO SI CADA JUGADOR TUVIESE 3 ARRAYS, QUE SERÁN SUS CARTONES. 
 $jugador1= array(
