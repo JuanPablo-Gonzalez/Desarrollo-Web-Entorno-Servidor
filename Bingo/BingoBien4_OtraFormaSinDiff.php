@@ -1,7 +1,8 @@
 <?php
 
 /*Juan Pablo González*/
-/*A PARTIR DE BIEN 4, SOLO QUEDA PODER TENER VARIOS GANADORES Y PONER IMÁGENES*/
+/*Funciona bien, lo hice como alternativa a hacerlo con array_diff, y para que quedase más claro el proceso de
+tachar al tener el número.*/
 
 //LO HE PENSADO COMO SI CADA JUGADOR TUVIESE 3 ARRAYS, QUE SERÁN SUS CARTONES. 
 $jugador1= array(
@@ -120,11 +121,11 @@ while(!$ganador1&&!$ganador2&&!$ganador3&&!$ganador4) {
 		$cartonDelGanador="cartón 2";
 	}
 	if($jugador1["carton3"]==$cartonGanador) {
-		$ganador2=true;
+		$ganador1=true;
 		$cartonDelGanador="cartón 3";
 	}
 	if($jugador2["carton1"]==$cartonGanador) {
-		$ganador1=true;
+		$ganador2=true;
 		$cartonDelGanador="cartón 1";
 	}
 	if($jugador2["carton2"]==$cartonGanador)  {
