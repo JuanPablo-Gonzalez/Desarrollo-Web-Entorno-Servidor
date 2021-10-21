@@ -92,7 +92,7 @@ function mostrarBolasBombo($numerosSacados) {
 function jugar($jugadores) {
     $numerosSacados= array();
     $ganador= false;
-    while(!$ganador) {
+    while(!$ganador&&count($numerosSacados)<61) {
         //COMPROBAMOS SI LOS NÚMEROS ALEATORIOS QUE VAN SALIENDO COINCIDEN CON LOS DEL CARTÓN
         $numAleatorio= random_int(1,60);
         if(!(in_array($numAleatorio,$numerosSacados))) {
@@ -102,6 +102,10 @@ function jugar($jugadores) {
         }
     }
     
+    /*PARA CONTROLAR SI NO HUBIESE GANADOR.
+    if(!$ganador)
+	    echo "No hay ningún ganador"."<br>";*/
+
     //MOSTRAMOS LOS NÚMEROS QUE HAN SALIDO DEL BOMBO.
     echo "<h3>NÚMEROS QUE HAN SALIDO DEL BOMBO</h3>";
 

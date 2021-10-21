@@ -8,7 +8,7 @@ usar array_diff, porque estaba más acorde con la lógica del bingo
 (ir tachando cada vez que se encuentra el número).
 */
 
-include 'funciones_bingo_intento2.php';
+include 'Funciones_Bingo.php';
 
 $jugadores= array();
 
