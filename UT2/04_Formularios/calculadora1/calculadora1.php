@@ -9,7 +9,10 @@
     $num2= $_POST["operando2"];
     $operacionElegida= $_POST["operacion"];
 
-    function calcular1() {
+    calcular1($num1,$num2,$operacionElegida);
+
+    //función.
+    function calcular1($num1,$num2,$operacionElegida) {
         $resultado= 0;
 
         if($operacionElegida=="suma") {
@@ -29,7 +32,15 @@
             $resultado= $num1/$num2;
         }
         
-        echo "<input type='text' name='Operando1'>";
+        echo "<label for='Operando1'>Operando 1: </label>";
+        echo "<input type='text' name='Operando1' value='$num1'>";
+        echo "<br>";
+
+        echo "<label for='Operando1'>Operando 2: </label>";
+        echo "<input type='text' name='Operando1' value='$num2'>";
+        echo "<br>";
+        echo "<br>";
+
         echo "Resultado operación: $num1 $simboloOperacion $num2 = $resultado";
     }
 ?>
