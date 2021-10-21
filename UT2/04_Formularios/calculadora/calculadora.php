@@ -10,5 +10,5 @@
     $num2= $_POST["operando2"];
     $operacionElegida= $_POST["operacion"];
 
-    calcular($num1,$num2,$operacionElegidae);
+    calcular($num1,$num2,$operacionElegida);
 ?>
