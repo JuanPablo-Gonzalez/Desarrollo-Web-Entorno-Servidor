@@ -1,12 +1,24 @@
 <?php
 
-    function limpiar($variable) {
+    //solo quita la primera backslash.
+    function test_input(&$variable) {
         $variable = trim($variable);
         $variable = stripslashes($variable);
         $variable = htmlspecialchars($variable);
 
         return $variable;
     }
+
+    function esNumero($num) {
+        $correcto= true;
+
+        if(!is_numeric($num)) 
+            $correcto= false;
+    }
+
+    //function validaciones($num1,$num2,$operacionElegida) {
+       
+    //}
 
     function calcular($num1,$num2,$operacionElegida) {
         $resultado= 0;
