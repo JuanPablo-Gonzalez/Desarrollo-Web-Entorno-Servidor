@@ -122,9 +122,27 @@
     }
 
     function todosSistemas($decimal) {
-        /*$binario= decbin($decimal);
+        $binario= decbin($decimal);
         $hexadecimal= dechex($decimal);
-        $octal= octdec($decimal);*/
-        //poner aquí el return de las funciones anteriores.
+        $octal= octdec($decimal);
+
+        echo "<label for='decimal'>Decimal: </label>";
+        echo "<input type='text' name='decimal' value='$decimal'>";
+        echo "<br><br>";
+
+        echo "<table border=1>";
+        echo "<tr>";
+        echo  "<td>Binario</td>";
+        echo "<td>$binario</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo  "<td>Octal</td>";
+        echo "<td>$octal</td>";
+        echo "</tr>";
+        echo "<tr>";
+        echo  "<td>Hexadecimal</td>";
+        echo "<td>$hexadecimal</td>";
+        echo "</tr>";
+        echo "</table>";
     }
 ?>

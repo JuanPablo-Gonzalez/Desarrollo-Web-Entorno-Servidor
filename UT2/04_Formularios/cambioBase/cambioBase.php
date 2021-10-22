@@ -17,4 +17,7 @@
         convertirHexadecimal($decimal);
     else if($operacionElegida=="octal")
         convertirOctal($decimal);
+    else if($operacionElegida=="todos")
+        todosSistemas($decimal);
+        
 ?>
