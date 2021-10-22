@@ -99,7 +99,7 @@ while(!$ganador) {
 			echo "Ha ganado el jugador 1 con el cartón 2"."<br>";
 			mostrarCarton($jugador1);
 		}
-		if (array_diff($jugador1["carton2"], $numerosSacados)==array()) {
+		if (array_diff($jugador1["carton3"], $numerosSacados)==array()) {
 			$ganador= true;
 			echo "Ha ganado el jugador 1 con el cartón 3"."<br>";
 			mostrarCarton($jugador1);
