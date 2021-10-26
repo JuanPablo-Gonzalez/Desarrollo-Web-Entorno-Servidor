@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>IP</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <form name="formulario" method="post" action="datos.php">
+        
+        <h1>Datos Alumnos</h1>
+
+        <label for="nombre">Nombre:</label> 
+        <input type="text" name="nombre">* Obligatorio <br>
+
+        <label for="apellido1">Apellido 1:</label>
+        <input type="text" name="apellido1">* Obligatorio <br>
+
+        <label for="apellido2">Apellido 2:</label> 
+        <input type="text" name="apellido2"> <br>
+
+        <label for="email">Email:</label> 
+        <input type="mail" name="email">* Obligatorio <br>
+
+        <fieldset>
+            <legend>Sexo</legend>
+            <input type="radio" value="mujer" name="sexo" /> Mujer </br>
+            <input type="radio" value="hombre" name="sexo" /> Hombre  </br>
+            *Obligatorio
+        </fieldset>
+
+        <br>
+
+        <input type="submit" value="enviar">
+        <input type="reset" value="borrar">
+    </form>   
+</body>
+</html>
