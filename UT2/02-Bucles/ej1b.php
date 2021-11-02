@@ -9,13 +9,13 @@
    $resto;
 
    while($auxDecimal!=0) {
-       if($auxDecimal%2==0) {
-            $resto= 0;
-       } else {
-            $resto= 1;
-       }
-       $binario= $resto.$binario;
-       $auxDecimal= ((integer)$auxDecimal/2); //Hay que hacer un cast a entero para que no de más ceros de los necesarios.
+     if($auxDecimal%2==0) {
+          $resto= 0;
+     } else {
+          $resto= 1;
+     }
+     $binario= $resto.$binario;
+     $auxDecimal= ((integer)$auxDecimal/2); //Hay que hacer un cast a entero para que no de más ceros de los necesarios.
    }
    echo "El número $decimal en binario es: $binario";
 ?>

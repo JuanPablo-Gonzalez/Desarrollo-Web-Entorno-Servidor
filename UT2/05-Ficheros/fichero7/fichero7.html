@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Fichero 1</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+
+    <h3>Operaciones sistemas Ficheros</h3>
+    <form name="formulario" method="post" action='fichero7.php'>
+
+    <label for="ficheroOrigen">Fichero Origen(path/nombre)</label>
+    <input type="text" name="ficheroOrigen"/> <br>
+
+    <label for="ficheroDestino">Fichero Destino(path/nombre)</label>
+    <input type="text" name="ficheroDestino"/> <br><br>
+
+    <fieldset>
+        <legend>Operaciones:</legend>
+        <input type="radio" value="copiarFichero" name="operacion" />Copiar fichero</br>
+        <input type="radio" value="renombrarFichero" name="operacion" />Renombrar fichero</br>
+        <input type="radio" value="borrarFichero" name="operacion" />Borrar fichero </br>
+    </fieldset>
+
+    <input type="submit" value="Ejecutar operación">
+    <input type="reset" value="borrar">
+        
+    </form>   
+</body>
+</html>
