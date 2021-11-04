@@ -41,7 +41,7 @@
 
     //EN ESTA FUNCIÓN LO QUE HAREMOS SERÁ SUMAR LOS DADOS DE CADA JUGADOR, MOSTRAR SU SUMA, Y ADEMÁS
     //DECIDIR QUIÉNES SON LOS GANADORES O GANADOR.
-    function comprobarGanador($jugadores) {
+    function comprobarGanador($jugadores,$numDados) {
         //Lo primero que haremos será obtener el número más alto que salga de sumar los dados de un jugador.
         $mayorSuma= 0;
         $contGanadores= 0;
@@ -52,7 +52,7 @@
             $numerosIguales= false;
             $resultadoUnique= array_unique($jugadores["$numeroJugador"]);
 
-            if(count($resultadoUnique)==1)
+            if(count($resultadoUnique)==1&&$numDados>2)
                 $sumaDados= 100;
             else {
                 foreach($jugador as $indiceDado=> $numDado) {

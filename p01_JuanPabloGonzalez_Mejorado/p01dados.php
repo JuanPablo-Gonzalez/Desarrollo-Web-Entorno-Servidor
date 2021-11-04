@@ -31,6 +31,6 @@
         mostrarJugadores($jugadores);
 
         //mostramos la suma de los dados de cada jugador y decidimos ganador.
-        comprobarGanador($jugadores); 
+        comprobarGanador($jugadores,$numDados); 
     }
 ?>
