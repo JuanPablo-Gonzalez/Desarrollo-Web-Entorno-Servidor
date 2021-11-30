@@ -44,7 +44,7 @@
             $nombreDept= strtoupper($nombreDept);
     
             //var_dump($_POST);
-            altaEmpleadoPDOLista($dniEmp,$nombreEmp,$fechaNac,$nombreDept);
+            //altaEmpleadoPDOLista($dniEmp,$nombreEmp,$fechaNac,$nombreDept);
         }
 	?>
 </body>
