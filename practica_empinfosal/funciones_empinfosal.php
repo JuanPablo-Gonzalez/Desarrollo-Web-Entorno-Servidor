@@ -27,6 +27,23 @@
         return $conn;
     }
 
+    function mostrarDepartamentos() {
+        try {
+            $conn= crearConexionPDO();
+            $queryNombreDept= $conn->prepare("SELECT nombre_dpto FROM departamento");
+            $queryNombreDept->execute();
+            // set the resulting array to associative
+            $result = $queryNombreDept->setFetchMode(PDO::FETCH_ASSOC);
+            foreach($queryNombreDept->fetchAll() as $row) {
+                echo '<option value="'.$row["nombre_dpto"].'">'.$row["nombre_dpto"].'</option>';
+            }
+        } 
+        catch(PDOException $e) {
+            echo $queryNombreDept . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+    }
+
     function mostrarSalario($nombreDept) {
         try {
             //Establecemos la conexión.
