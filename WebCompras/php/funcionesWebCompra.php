@@ -27,6 +27,8 @@
         return $conn;
     }
 
+    /*Aquí había un error, porque ponía desde C-000, era porque no puse el '-' y al ponerlo se hacia mal el substr. Mejor hacerlo 
+    directamente cogiendo los 3 últimos (-3). CAMBIARLO.*/
     function altaCategorias($nombreCategoria) {
         $conn= crearConexionPDO();
         echo "<br>";
@@ -218,6 +220,92 @@
         } 
         catch(PDOException $e) {
             echo $insertAprovisionar . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+    }
+
+    /*
+    El control de errores hay que hacerlo creando una función de errores, a la que pasaremos el codigo que se lanza en el catch ($e o lo que sea)
+    y el nombre de la función, con literal ("nombre función que produce el error"). En la función tan solo debemos indicar el número de error 
+    y el nombre de la función, y luego el mensaje que se lanzará, así todos en cascada para llevar un registro. Llamaremos a la función
+    en el catch para que ejecute el error.
+
+    - ALGO ASÍ:
+
+    catch(PDOException $e) { //PDOException recoge los errores de la base de datos.
+        $e->getCode(); //recoge el código de error.
+
+        errores($e,"altaCategorias");
+    }
+
+    function errores($e,funcion) { //con las condiciones comprobamos y controlamos todos los errores.
+        if($e=="1062" && funcion=="altaCategorias") {
+            echo "Hay dos categorías duplicadas.";
+        } else if ($e=="1062" && funcion=="altaProductos") {
+             echo "Hay dos productos duplicados.";
+        }
+        else if(...) {
+
+        } else
+            echo "Se ha producido el error $e"; //en caso de que no se controle algún error, se mandará directamente el código.
+    } 
+    */
+
+    function consultarStock($producto) {
+        $conn= crearConexionPDO();
+        echo "<br>";
+
+        try {
+            $queryCantidadProducto= $conn->prepare("SELECT almacena.num_almacen,almacena.id_producto,almacena.cantidad 
+            from almacen, producto, almacena 
+            where almacen.num_almacen=almacena.num_almacen and
+            producto.id_producto=almacena.id_producto and
+            almacena.id_producto='$producto'");
+
+            /*SELECT num_almacen,id_producto,cantidad
+            from almacena
+            where almacena.id_producto='P0001'*/
+
+            $queryCantidadProducto->execute();
+
+            // set the resulting array to associative
+            $result = $queryCantidadProducto->setFetchMode(PDO::FETCH_ASSOC);
+            foreach($queryCantidadProducto->fetchAll() as $row) {
+                echo "Hay ".$row["cantidad"]." unidades del producto ".$row["id_producto"]." en el almacén ".$row["num_almacen"];
+                echo "<br>";            
+            }
+        } 
+        catch(PDOException $e) {
+            echo $queryCantidadProducto . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+    }
+
+    function consultarAlmacen($almacen) {
+        $conn= crearConexionPDO();
+        echo "<br>";
+
+        try {
+            $queryProductosAlmacen= $conn->prepare("SELECT almacena.num_almacen,producto.id_producto,
+            producto.nombre,producto.precio,producto.id_categoria
+            from producto, almacen, almacena 
+            where producto.id_producto=almacena.id_producto and
+            almacen.num_almacen=almacena.num_almacen and
+            almacena.num_almacen='$almacen'");
+
+            $queryProductosAlmacen->execute();
+
+            // set the resulting array to associative
+            $result = $queryProductosAlmacen->setFetchMode(PDO::FETCH_ASSOC);
+            foreach($queryProductosAlmacen->fetchAll() as $row) {
+                //echo "Información de los productos del almacén".$row["num_almacen"];
+                echo "Datos del producto ".$row["id_producto"].":<br>".
+                "Nombre: ".$row["nombre"].", Precio: ".$row["precio"].", Categoría: ".$row["id_categoria"];
+                echo "<br><br>";
+            }
+        } 
+        catch(PDOException $e) {
+            echo $queryProductosAlmacen . "<br>" . $e->getMessage();
         }
         $conn = null;
     }
