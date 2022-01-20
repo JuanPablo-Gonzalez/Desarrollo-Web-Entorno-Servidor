@@ -25,6 +25,7 @@
 
         return $conn;
     }
+    
     function registroCliente($nif,$nombre,$apellido,$cp,$direccion,$ciudad) {
         $conn= crearConexionPDO();
         echo "<br>";
@@ -99,7 +100,6 @@
         }
         $conn = null;
     }
-    //FALTA HACER LAS ACCIONES DE LAS PÁGINAS A LAS QUE SE DIRIGE.
 
     function loginClienteCookies($nombre,$clave) {
         $conn= crearConexionPDO();
@@ -117,15 +117,15 @@
     
             //Si existe entonces se crearán las variables de sesión y se lleva al usuario a las otras páginas.
             if($cuentaNif==1) {
-                $cookie_name= "Usuario";
+                $cookie_name= "nombre";
                 $cookie_value= $nombre;
-                setcookie($cookie_name,$cookie_value, time() + (86400 * 30), "/");
+                setcookie($cookie_name,$cookie_value,time()+3600,"/");
 
-                $cookie_name2= "NIF";
-                $cookie_value2= $row["nif"];
-                setcookie($cookie_name2,$cookie_value2, time() + (86400 * 30), "/");
+                $cookie_name= "nif";
+                $cookie_value= $row["nif"];
+                setcookie($cookie_name,$cookie_value,time()+3600,"/");
                
-                header("location: comwelcome.php"); //NOS LLEVARÁ A LA PÁGINA DE COMPRAS.
+                header("location: comwelcomeCookies.php"); //NOS LLEVARÁ A LA PÁGINA DE BIENVENIDA.
             }
             else {
                 echo "El usuario es incorrecto.";
@@ -137,6 +137,99 @@
         $conn = null;
     }
 
-    /*Falta hacer lo de cookies, hacer bien lo de cerrar sesión (que rediriga bien según lo que se pulse) 
-    y revisar ejercicio en general.*/
+    function mostrarProductos() {
+        $conn= crearConexionPDO();
+        echo "<br>";
+
+        try {
+            $queryNombreProd= $conn->prepare("SELECT id_producto,nombre FROM producto");
+            $queryNombreProd->execute();
+            // set the resulting array to associative
+            $result = $queryNombreProd->setFetchMode(PDO::FETCH_ASSOC);
+            foreach($queryNombreProd->fetchAll() as $row) {
+                echo '<option value="'.$row["id_producto"].'">'.$row["nombre"].'</option>';
+            }
+        } 
+        catch(PDOException $e) {
+            echo $queryNombreProd . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+    }
+
+    function anadirProductoCesta($producto,$cantidadProducto) { //proceso de añadir productos a la cesta.
+        $conn= crearConexionPDO();
+        echo "<br>";
+
+        //AGREGAR A LA CESTA DE LA COMPRA
+        if (!isset($_SESSION['cesta'])) 
+            $_SESSION['cesta']=array(array($producto,$cantidadProducto)); //Aquí guardando el codigo del producto mejor.
+        else 
+            array_push($_SESSION['cesta'],array($producto,$cantidadProducto));
+        
+        var_dump($_SESSION['cesta']);
+    
+        $conn = null;
+    }
+
+    function borrarProductos() { //proceso de añadir productos a la cesta.
+        unset($_SESSION['cesta']);
+    }
+
+    function comprarProductos($producto,$cantidadProducto) {
+        //SE HACE TODO EL PROCESO DE INSERT, UPDATE, BUSCAR ALMACÉN...
+       echo("Compra hecha");
+    }
+
+    /*Función completa hecha antes.
+    function anadirProductoCesta($producto,$cantidadProducto) {
+        $conn= crearConexionPDO();
+        echo "<br>";
+
+        try {
+            //recorrer almacenes, si está en el almacen coger el producto de ese almacén y hacer todo.
+            $hayUnidades= false;
+            $fechaCompra= date("Y-m-d H:i:s");
+
+            $queryCantidad= $conn->prepare("SELECT num_almacen,cantidad FROM almacena
+            where id_producto='$producto'");
+            $queryCantidad->execute();
+            // set the resulting array to associative
+            $result = $queryCantidad->setFetchMode(PDO::FETCH_ASSOC);
+            ///Si hay unidades suficientes del producto en algún almacen se pone a true.
+            foreach($queryCantidad->fetchAll() as $row) {
+                if($row["cantidad"]>=$cantidadProducto) {
+                    $hayUnidades= true;
+                    $cantidadActual= $row["cantidad"]; //para restarle las unidades.
+                    $almacenProducto= $row["num_almacen"]; //para restarle las unidades.
+                }
+            }
+            
+            if($hayUnidades) {
+                $cliente= $_SESSION["nombre"];
+                $insertCompra= "INSERT INTO compra VALUES 
+                ('$cliente','$producto','$fechaCompra','$cantidadProducto')";
+                $conn->exec($insertCompra);
+                echo "Se ha realizado la compra correctamente.";
+
+                //Se hace el update para restar las unidades al almacén correspondiente.
+                //Tal como lo tengo puesto siempre será el último almacén con disponibilidad.
+                $nuevaCantidad= $cantidadActual-$cantidadProducto;
+                $updateAlmacena= "UPDATE almacena SET cantidad='$nuevaCantidad' WHERE num_almacen='$almacenProducto' 
+                AND id_producto='$producto'";
+                $conn->exec($updateAlmacena);
+            }
+            else {
+                echo "No hay unidades del producto seleccionado.";
+            }
+        } 
+        catch(PDOException $e) {
+            echo $insertCompra . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+    }*/
+
+    /*
+    Para meter arrays en las cookies> serialize-unsearilize o json_encode y json_decode (mejor con json).
+    Para meter arrays en las sessions>  
+    */ 
 ?>

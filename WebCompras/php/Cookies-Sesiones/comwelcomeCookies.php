@@ -1,10 +1,10 @@
 <?php 
    //Se recuperan los valores de la sesión.
    require 'funcionesCookiesSesiones.php';
-   session_start();
 
-   if(!isset($_SESSION["nif"]))
-		header("location: comlogincli.php");
+   //Si la cookie no existe se enviará al formulario de login.
+   if(!isset($_COOKIE["nif"]))
+		header("location: comlogincliCookies.php");
 ?>
 
 <html>
@@ -14,7 +14,7 @@
    
    <body>
 		<!-- Se muestra el nombre del usuario recuperado de una variable de sesión -->
-		<h1>Bienvenido <?php echo $_SESSION['nombre']."-NIF: ".$_SESSION['nif']; ?></h1> 
+		<h1>Bienvenido <?php echo $_COOKIE['nombre']." -NIF: ".$_COOKIE['nif']; ?></h1> 
 		<!-- INICIO DEL FORMULARIO -->
 		<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 			<div>
@@ -29,22 +29,22 @@
 
 <?php 
 	if($_SERVER["REQUEST_METHOD"]=="POST") {
-		$compra= limpiar($_POST["comprar"]);
+		$comprar= limpiar($_POST["comprar"]);
 		$consultar= limpiar($_POST["consultar"]); 
 		$cerrar= limpiar($_POST["cerrar"]); 
 
-		if($compra){
+		if($comprar){
 			header("location: comprocli.php");
 		}
 		else if($consultar){
 			header("location: comconscli.php");
 		}
 		else if($cerrar){
-			// remove all session variables
-			session_unset();
-			// destroy the session
-			session_destroy();
-			header("location: comlogincli.php");
+			//Borramos la cookie.
+            //Al borrarla sin poner la barra me daba error, no la borraba bien pero cuando la incluí sí.
+			setcookie("nombre", "",time()-3600,"/"); 
+            setcookie("nif", "",time()-3600,"/");
+			header("location: comlogincliCookies.php");
 		}
 	}
 ?>
