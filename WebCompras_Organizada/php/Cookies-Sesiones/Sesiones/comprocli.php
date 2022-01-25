@@ -30,6 +30,7 @@
         <input type="submit" value="Añadir a la cesta" name="anadir">
         <input type="submit" value="Borrar cesta" name="borrar">
         <input type="submit" value="Comprar productos" name="comprar">
+        <input type="submit" value="Volver a inicio" name="inicio">
     </form>   
 
     <?php
@@ -43,6 +44,8 @@
                 borrarProductos($producto,$cantidadProducto);
             else if(isset($_POST["comprar"]))
                 comprarProductos($producto,$cantidadProducto);
+            else if(isset($_POST["inicio"]))
+                header("location: comwelcome.php");
         }
 	?>
 </body>

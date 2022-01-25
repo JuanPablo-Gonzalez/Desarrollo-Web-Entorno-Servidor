@@ -25,6 +25,7 @@
 
         <input type="submit" value="enviar">
         <input type="reset" value="borrar">
+        <input type="submit" value="Volver a inicio" name="inicio">
     </form>  
 </body>
 
@@ -32,6 +33,9 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $fechaInicio= limpiar($_POST["fechaInicio"]);
         $fechaFin= limpiar($_POST["fechaFin"]);
+
+        if(isset($_POST["inicio"]))
+                header("location: comwelcome.php");
 
         consultaCompras($fechaInicio,$fechaFin);
     }
