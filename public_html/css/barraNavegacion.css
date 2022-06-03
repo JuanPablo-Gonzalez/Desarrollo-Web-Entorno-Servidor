@@ -1,0 +1,54 @@
+/*estilos nav*/
+nav {
+	background-color: rgb(56, 56, 56);
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 10px 0;
+	font-family: arial;
+}
+
+.parte-nav {
+	margin: 0;
+}
+
+#logo h1 a{
+	color: white;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	top: 0;
+	margin: 0 30px;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 6px 10px;
+	text-decoration: none;
+    margin-left: 10px;
+    border-radius: 20px;
+}
+
+li a:hover {
+	/*background-color: white;*/
+	color: rgb(250, 222, 179);
+}
+
+#perfil a img {
+	width: 55px;
+	border-radius: 30%;
+	border: solid 2px rgb(250, 222, 179);
+}
+/*fin estilos nav*/

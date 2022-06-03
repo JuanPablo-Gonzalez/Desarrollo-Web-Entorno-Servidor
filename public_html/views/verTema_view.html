@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login Music Network</title>
+    <link rel="stylesheet" href="../css/verTema.css">
+    <link rel="stylesheet" href="../css/barraNavegacion.css">
+    <script src="https://kit.fontawesome.com/ce14add742.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src='../controllers/crearTema.js'></script>
+  </head>
+  <body>
+    <?php
+      include_once "barraNavegacion.html";
+    ?>
+    <header>
+      <div class="encabezado-tema">
+        <?php
+          foreach($comentarios as $row) {
+              $titulo= $row['titulo'];
+              $usuario_creador= $row['tag'];
+              //$comentarios= 2;
+              break;
+          }
+
+          echo "<h2>$titulo</h2>";
+          echo "<div class='info-adicional-tema'>";
+          echo "<span><b>Creado por:</b> $usuario_creador</span>";
+          echo "<span><b>Comentarios:</b> 2</span>";
+          echo "<span><b>Publicación:</b> hace 2 dias</span>";
+          echo "</div>";
+        ?>
+      </div>
+    </header>
+    <main>
+      <a href="#logo" class="flecha"></a>
+    
+      <section class="seccion-comentarios">
+        <a href="#form-responder"><button>Escribe tu respuesta</button></a>
+
+          <?php
+              foreach($comentarios as $row) {
+                  echo "<div class='contenedor-comentario'>";
+                  echo "<div class='encabezado-comentario'>";
+                  echo "<img src='../imagenes/perfil2.jpg' alt='imagen de perfil' width='80px'/>";
+                  echo "<span><a href=''>".$row['tag']."</a></span>";
+                  echo "</div>";
+                  echo "<div class='mensaje-comentario'>";
+                  echo "<p>".nl2br($row['mensaje'])."</p>"; //nl2br para que los espacios se conviertan correctamente
+                  echo "</div>";
+                  echo "</div>";
+              }
+          ?>
+      </section>
+      <section class="seccion-responder">
+          <form name="formulario" id="form-responder" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
+            <label for="comentario">Escribe tu respuesta</label> <br>
+            <textarea name="comentario" id="comentario" cols="83" rows="15" wrap="hard"></textarea>
+
+            <div id="barra-añadir-adicionales">
+              <button type="button" name="negrita" id="negrita"><b>B</b></button>
+              <button type="button" name="cursiva" id="cursiva"><i>I</i></button>
+              <button type="button" name="subrayado" id="subrayado"><u>A</u></button>
+            </div>
+
+            <br>
+
+            <input type="hidden" name="tema-elegido" id="tema-elegido" value="<?php echo $idTema ?>">
+            <input type="submit" id="boton-responder" value="Responder"> <br>
+          </form>
+
+          <br>
+
+          <p id="ver">
+        
+          </p>
+      </section>
+    </main>
+    <!--<aside>
+      Publicidad
+    </aside>-->
+    <footer>footer</footer>
+  </body>
+</html>

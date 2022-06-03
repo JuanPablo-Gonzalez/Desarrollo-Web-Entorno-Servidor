@@ -1,0 +1,28 @@
+<nav>
+	<div id="logo">
+	  <h1><a href="../controllers/login_controller.php">Music-Network</a></h1>
+	</div>
+
+	<ul id="listado-nav">
+	  <li><a href="../controllers/foro_controller.php">Comunidad</a></li>
+	  <li><a href="#contact">Canciones</a></li>
+	  <li><a href="#sobre">Sobre nosotros</a></li>
+	</ul>
+	<?php 
+		//Servirá para que siempre muestra el perfil, sea cual sea la ubicación
+
+		if(isset($_SESSION["email"])){
+			if(strpos($_SERVER["REQUEST_URI"],"usuarios"))
+				$usuarioActivo= $_SESSION['tag'];
+			else
+				$usuarioActivo= "usuarios/".$_SESSION['tag'];
+		} else {
+			$usuarioActivo= "controllers/login_controller.php";
+		}
+	?>
+	<div id="perfil">
+	  <a class="active" href="../<?php echo $usuarioActivo?>">
+		  <img src="../imagenes/perfil2.jpg" alt="perfil">
+	  </a>
+	</div>
+  </nav>
